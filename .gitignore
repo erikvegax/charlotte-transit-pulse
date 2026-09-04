@@ -1,0 +1,61 @@
+# --- Go ---
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+services/*/bin/
+services/*/*.out
+
+# Test/coverage output
+*.test
+coverage.out
+coverage.html
+
+# Go build cache / vendor (only if vendoring is not used intentionally)
+vendor/
+
+# --- Node / React (web/) ---
+web/node_modules/
+web/dist/
+web/build/
+web/.vite/
+web/*.local
+
+# npm/yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Environment / secrets ---
+.env
+.env.*
+!.env.example
+services/*/.env
+services/*/.env.*
+!services/*/.env.example
+web/.env
+web/.env.*
+!web/.env.example
+
+# --- Docker ---
+deploy/*.env
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Misc build/output ---
+dist/
+tmp/
