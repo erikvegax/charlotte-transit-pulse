@@ -1,0 +1,13 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station
+00001,00001,"7th St Station",,  35.227375, -80.838088,,,0,
+00002,00002,"CTC Station",,  35.225336, -80.840975,,,0,place_TRANCT
+00003,00003,"3rd/ Convention Center Station",,  35.223631, -80.843237,,,0,
+00004,00004,"Brooklyn Village Station",,  35.221319, -80.847066,,,0,
+00005,00005,"Carson Station",,  35.218822, -80.850947,,,0,
+00006,00006,"Bland Station",,  35.215787, -80.855346,,,0,
+00007,00007,"East/ West Station",,  35.212117, -80.859140,,,0,place_E/WSTS
+00008,00008,"New Bern Station",,  35.199887, -80.869042,,,0,
+00009,00009,"Scaleybark Station",,  35.190842, -80.875075,,,0,
+00010,00010,"Woodlawn Station",,  35.175789, -80.879063,,,0,
+place_36thST,,"36th St Station",,  35.250276, -80.806647,,,1,
+place_BFDHLT,,"Rosa Parks Place CTC",,  35.272793, -80.857583,,,1,

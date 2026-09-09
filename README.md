@@ -65,7 +65,7 @@ charlotte-transit-pulse/
 │       ├── go.mod
 │       └── README.md
 ├── pkg/                          # shared Go code (types used by multiple services)
-│   ├── models/                    # Vehicle, StopEvent, Route structs
+│   ├── model/                     # Vehicle, TripUpdate, Alert, Route, Stop, Trip, StopTime structs
 │   └── config/                    # shared env/config loading
 ├── web/
 │   ├── src/
@@ -73,6 +73,7 @@ charlotte-transit-pulse/
 │   └── README.md
 ├── deploy/
 │   ├── docker-compose.yml         # local Kafka + MongoDB for dev
+│   ├── README.md                  # local dev commands (start/verify/logs/reset)
 │   ├── ingest.Dockerfile
 │   ├── consumer.Dockerfile
 │   └── api.Dockerfile
@@ -83,7 +84,7 @@ charlotte-transit-pulse/
 └── README.md
 ```
 
-Each Go service (`services/ingest`, `services/consumer`, `services/api`) has its own `go.mod`, so it can be built and deployed independently. Shared types (e.g. `Vehicle`, `StopEvent`) live in `pkg/` rather than being duplicated across services. Service-specific setup lives in each service's own README; this root README stays high-level.
+Each Go service (`services/ingest`, `services/consumer`, `services/api`) has its own `go.mod`, so it can be built and deployed independently. Shared types (e.g. `Vehicle`, `TripUpdate`) live in `pkg/model/` rather than being duplicated across services. Service-specific setup lives in each service's own README; this root README stays high-level.
 
 ## Getting started
 

@@ -97,7 +97,7 @@ No self-managed infrastructure is required for this project. Kafka and MongoDB a
 
 ### Local development
 
-Kafka and MongoDB run locally via Docker Compose (`deploy/docker-compose.yml`) while building:
+Kafka and MongoDB run locally via Docker Compose (`deploy/docker-compose.yml`) while building. See [`deploy/README.md`](../deploy/README.md) for the full command reference (start, verify, logs, reset) — quick version:
 
 ```bash
 cd deploy
