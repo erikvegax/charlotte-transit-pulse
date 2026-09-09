@@ -40,15 +40,51 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for how the pieces fit together.
 
 ```
 charlotte-transit-pulse/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml              # lint + test on PR for Go services
+│       └── ci-web.yml          # lint + test on PR for React app
 ├── services/
-│   ├── ingest/          # Polls GTFS-RT feed, publishes to Kafka
-│   ├── consumer/        # Kafka consumers, computes delays, writes to MongoDB
-│   └── api/             # REST API serving processed data
-├── web/                 # React dashboard
+│   ├── ingest/
+│   │   ├── main.go
+│   │   ├── gtfsrt/              # protobuf decoding, feed polling logic
+│   │   ├── kafka/                # producer setup
+│   │   ├── go.mod
+│   │   └── README.md
+│   ├── consumer/
+│   │   ├── main.go
+│   │   ├── delay/                 # delay computation logic
+│   │   ├── mongo/                 # storage layer
+│   │   ├── kafka/                  # consumer setup
+│   │   ├── go.mod
+│   │   └── README.md
+│   └── api/
+│       ├── main.go
+│       ├── handlers/
+│       ├── mongo/
+│       ├── go.mod
+│       └── README.md
+├── pkg/                          # shared Go code (types used by multiple services)
+│   ├── model/                     # Vehicle, TripUpdate, Alert, Route, Stop, Trip, StopTime structs
+│   └── config/                    # shared env/config loading
+├── web/
+│   ├── src/
+│   ├── package.json
+│   └── README.md
+├── deploy/
+│   ├── docker-compose.yml         # local Kafka + MongoDB for dev
+│   ├── README.md                  # local dev commands (start/verify/logs/reset)
+│   ├── ingest.Dockerfile
+│   ├── consumer.Dockerfile
+│   └── api.Dockerfile
 ├── docs/
 │   └── ARCHITECTURE.md
+├── .gitignore
+├── LICENSE
 └── README.md
 ```
+
+Each Go service (`services/ingest`, `services/consumer`, `services/api`) has its own `go.mod`, so it can be built and deployed independently. Shared types (e.g. `Vehicle`, `TripUpdate`) live in `pkg/model/` rather than being duplicated across services. Service-specific setup lives in each service's own README; this root README stays high-level.
 
 ## Getting started
 
@@ -67,7 +103,7 @@ git clone https://github.com/erikvegax/charlotte-transit-pulse.git
 cd charlotte-transit-pulse
 
 # start Kafka + MongoDB locally
-docker compose up -d
+cd deploy && docker compose up -d && cd ..
 
 # run the ingestion service
 cd services/ingest && go run .
@@ -86,13 +122,12 @@ Environment variables and per-service configuration are documented in each servi
 
 ## Roadmap
 
-- Data ingestion service (Go): poll GTFS-RT, publish to Kafka; seed static schedule into MongoDB
-- Kafka consumers + MongoDB storage: join real-time positions against schedule, persist computed delays
-- Go REST API layer: current positions, on-time performance, historical trends
-- React dashboard: live map + stats view
-- Equity overlay: cross-reference with 311 / CMPD data by neighborhood
-- Tests, CI/CD, deploy, docs
+- [1] Data ingestion service (Go): poll GTFS-RT, publish to Kafka; seed static schedule into MongoDB
+- [2] Kafka consumers + MongoDB storage: join real-time positions against schedule, persist computed delays
+- [3] Go REST API layer: current positions, on-time performance, historical trends
+- [4] React dashboard: live map + stats view
+- [5] Equity overlay: cross-reference with 311 / CMPD data by neighborhood
+- [6] Tests, CI/CD, deploy, docs
 
 ## License
-
 MIT
